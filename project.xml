@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+    <!-- META DATA -->
+	<meta title="[LD32] Untitled" package="br.com.sixsided.ld32" version="1.0.0" company="SIXSIDED Developments" />
+    
+    <!-- OUTPUT PATH -->
+	<app main="br.com.sixsided.ld32.Main" file="LD32" path="binary" />
+    
+    <!-- WINDOW OPTIONS -->
+    <window background="#ffffff" fps="60" />
+    <window width="800" height="450" unless="mobile" />
+    <window if="desktop" orientation="landscape" resizable="false" />
+    <window orientation="landscape" vsync="false" antialiasing="0" if="cpp" />
+	
+    <!-- SOURCE PATH -->
+	<source path="source" />
+	
+    <!-- HAXE LIBS -->
+	<haxelib name="openfl" />
+    <haxelib name="actuate" />
+    <haxelib name="svg" />
+	
+    <!-- ASSETS PATH -->
+	<icon path="assets/sixsided.svg" />
+	<assets path="assets/fonts" rename="fonts" />
+	<assets path="assets/image" rename="image" />
+	<assets path="assets/music" rename="music" />
+	<assets path="assets/sound" rename="sound" />
+</project>
