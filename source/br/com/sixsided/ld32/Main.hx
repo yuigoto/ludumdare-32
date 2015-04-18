@@ -2,14 +2,13 @@ package br.com.sixsided.ld32;
 
 // Importing packages
 import openfl.display.Sprite;
+import openfl.events.Event;
 
 /**
- * LD32 :: Untitled Project
+ * LD32 :: A "Fruity" Shooter
  * ============================================================
  * 
  * My entry for LD#32.
- * 
- * Currently, this is just a blank template.
  * 
  * @author Fabio Yuiti Goto
  * @link http://sixsided.com.br
@@ -24,5 +23,35 @@ class Main extends Sprite {
 	public function new () {
         // Calling super constructor
 		super ();
+        
+        // Checks if stage was initialized
+        if ( null != stage ) {
+            init( null );
+        } else {
+            addEventListener( Event.ADDED_TO_STAGE, init );
+        }
 	}
+    
+    /**
+     * Main method, works like a "constructor".
+     * 
+     * @param e
+     */
+    private function init( e:Event ):Void 
+    {
+        // Remove event listener
+        removeEventListener( Event.ADDED_TO_STAGE, init );
+        
+        // Initial debug message
+        trace( 'Application initialized!' );
+        
+        // Insert test object/main
+        var test:MainTest = new MainTest();
+        
+        addChild( test );
+        
+        // MemFPS
+        var mems:MemFPS = new MemFPS();
+        addChild( mems );
+    }
 }
