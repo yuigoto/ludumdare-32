@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
     <!-- META DATA -->
-	<meta title="[LD32] Untitled" package="br.com.sixsided.ld32" version="1.0.0" company="SIXSIDED Developments" />
+	<meta title="[LD32] Berry | The Last Straw" package="br.com.sixsided.ld32" version="1.0.0" company="SIXSIDED Developments" />
     
     <!-- OUTPUT PATH -->
 	<app main="br.com.sixsided.ld32.Main" file="LD32" path="binary" />
