@@ -2,6 +2,8 @@
 
 ## My entry for the Ludum Dare #32 Jam
 
+![Berry Title](art/berrytitle.png)
+
 Berry is a strawberry, the last one actually :P, in the middle of a zombie grape apocalypse. He knows he's goin' down, but not without a fight!
 
 To fight the horde of zombie grapes his only weapons are his own seeds, but he has to spin really fast to throw'em on to cause enough damage. The downside of this is that he doesn't have control on the direction of his projectiles!
