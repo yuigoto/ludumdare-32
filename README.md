@@ -67,4 +67,4 @@ My girlfriend, **Glauce Fernandes**, who gave me courage, motivation ans also in
 My **whole family**, which understood me and let me do what I wanted for my own life, even though sometimes it means go against their opinions. :)
 
 
-To a **LOT** of people in the LD irc channel, commenters, people on twitter and everybody who answered my newbie questions. ;)
+To a **LOT** of people in the LD irc channel, people the OpenFl community (forgot to put it here >_<), commenters, people on twitter and everybody who answered my newbie questions. ;)
