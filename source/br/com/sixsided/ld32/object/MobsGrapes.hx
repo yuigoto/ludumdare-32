@@ -3,6 +3,7 @@ package br.com.sixsided.ld32.object;
 // Importing packages
 import br.com.sixsided.ld32.libs.Zero;
 import openfl.Assets;
+import openfl.display.BitmapData;
 import openfl.display.Shape;
 import openfl.display.Sprite;
 import openfl.display.Tilesheet;
@@ -27,11 +28,15 @@ class MobsGrapes extends Mobs
     
     /**
      * Main constructor.
+     * 
+     * @var bitmapData Bitmapdata for this sprite.
      */
-    public function new() 
+    public function new( bitmapData:BitmapData ) 
     {
         // Super constructor
         super();
+        
+        bitmap = bitmapData;
         
         // Certifying that stage is set
         if ( null != stage ) {
@@ -70,14 +75,18 @@ class MobsGrapes extends Mobs
         
         // Inicializa variáveis
         hp = Zero.randomNumber( 5, 8 );
-        attack = Zero.randomNumber( 2, 4 );
-        speed = Zero.randomNumber( 10, 14 ) * 0.25; 
+        attack = Zero.randomNumber( 8, 16 );
+        if ( stage.frameRate <= 30 ) {
+            speed = ( Zero.randomNumber( 10, 14 ) * 0.25 ) * 2; 
+        } else {
+            speed = Zero.randomNumber( 10, 14 ) * 0.35; 
+        }
         
         // Drawing bounding box
         bounding();
         
         // Initializes tilesheet
-        tile = new Tilesheet( Assets.getBitmapData( "image/sprite-grapes.png" ) );
+        tile = new Tilesheet( bitmap );
         
         // Defines all the tiles ( 64 X 112 )
         for ( row in 0...5 ) {

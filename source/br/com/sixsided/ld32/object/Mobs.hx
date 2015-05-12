@@ -1,6 +1,7 @@
 package br.com.sixsided.ld32.object;
 
 // Importing packages
+import openfl.display.BitmapData;
 import openfl.display.Shape;
 import openfl.display.Sprite;
 import openfl.display.Tilesheet;
@@ -87,4 +88,9 @@ class Mobs extends Sprite
      * Tile interval.
      */
     private var tileTime:Int = 3;
+    
+    /**
+     * Sprite Bitmapdata
+     */
+    public var bitmap:BitmapData;
 }

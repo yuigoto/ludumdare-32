@@ -12,6 +12,7 @@ import br.com.sixsided.ld32.object.ScoresBars;
 import motion.Actuate;
 import motion.easing.Quad;
 import openfl.Assets;
+import openfl.display.BitmapData;
 import openfl.display.Shape;
 import openfl.display.Sprite;
 import openfl.events.Event;
@@ -170,6 +171,19 @@ class Game extends Sprite
     
     
     
+    /* BITMAP HANDLERS
+     * ============================================================ */
+    
+    /**
+     * Spritelist.
+     */
+    private var spriteList:Array<BitmapData> = [
+        Assets.getBitmapData( "image/sprite-player.png" ), 
+        Assets.getBitmapData( "image/sprite-grapes.png" )
+    ];
+    
+    
+    
     /* CONSTRUCTOR + DESTRUCTOR
      * ============================================================ */
     
@@ -249,7 +263,7 @@ class Game extends Sprite
         ring.y = stage.stageHeight / 2 - ring.height / 2;
         
         // Creating player
-        player = new Player();
+        player = new Player( spriteList[0] );
         ring.addChild( player );
         
         // Center player on ring
@@ -330,11 +344,13 @@ class Game extends Sprite
                 // Increases hit time
                 player.hitsTime += 1;
                 
+                /**
                 if ( player.hitsTime < 25 && ( player.hitsTime % 7 ) == 0 ) {
                     player.alpha = 0.3;
                 } else {
                     player.alpha = 1;
                 }
+                */
             } else {
                 player.alpha = 1;
             }
@@ -384,7 +400,8 @@ class Game extends Sprite
             scoresBars.update( scores, time );
             
             // Swapping layers to simulate depth
-            swapLayers();
+            //swapLayers();
+            layersSwapping( ring );
         } else {
             // Removes all bars
             Actuate.tween(
@@ -546,7 +563,7 @@ class Game extends Sprite
             var pX:Float = player.x;
             var pY:Float = player.y;
             var radian:Float = Math.PI / 180;
-            var dist:Float = 6;
+            var dist:Float = ( stage.frameRate <= 40 ) ? 12 : 6;
             var newX:Float;
             var newY:Float;
             
@@ -735,7 +752,7 @@ class Game extends Sprite
     public function projectileMovement():Void 
     {
         // Distance to travel
-        var distance:Int = 12;
+        var distance:Int = ( stage.frameRate <= 40 ) ? 24 : 12;
         
         // Radians
         var radian:Float = Math.PI / 180;
@@ -863,7 +880,7 @@ class Game extends Sprite
                     player.hp = 0;
                 } else {
                     rate = 100 - rate;
-                    player.hp -= 1 * ( rate / 100 );
+                    player.hp -= 3 * ( rate / 100 );
                 }
             } else {
                 player.bleedingTime -= 1;
@@ -1030,83 +1047,88 @@ class Game extends Sprite
             rands = Zero.randomNumber( 20, 25 );
         }
         
-        for ( i in 0...rands ) {
-            // Define random coordinates, far from player
-            var PX:Int = Zero.randomNumber(
-                96, 
-                Math.floor( ring.width - 96 ) 
-            );
-            var PY:Int = Zero.randomNumber(
-                80, 
-                Math.floor( ring.height - 80 ) 
-            );
-            
-            // Verifying that its far from player
-            if ( 
-                PX < player.x + player.width * 4 
-                && PX > player.x + player.width * 4
-            ) {
-                while ( 
+        if ( ring.numChildren < 41 ) {
+            for ( i in 0...rands ) {
+                // Define random coordinates, far from player
+                var PX:Int = Zero.randomNumber(
+                    96, 
+                    Math.floor( ring.width - 96 ) 
+                );
+                var PY:Int = Zero.randomNumber(
+                    80, 
+                    Math.floor( ring.height - 80 ) 
+                );
+                
+                // Verifying that its far from player
+                if ( 
                     PX < player.x + player.width * 4 
                     && PX > player.x + player.width * 4
                 ) {
-                    PX = Zero.randomNumber(
-                        96, 
-                        Math.floor( ring.width - 96 )
-                    );
+                    while ( 
+                        PX < player.x + player.width * 4 
+                        && PX > player.x + player.width * 4
+                    ) {
+                        PX = Zero.randomNumber(
+                            96, 
+                            Math.floor( ring.width - 96 )
+                        );
+                    }
                 }
-            }
-            
-            if ( 
-                PY < player.y + player.height * 4 
-                && PY > player.y + player.height * 4
-            ) {
-                while ( 
+                
+                if ( 
                     PY < player.y + player.height * 4 
                     && PY > player.y + player.height * 4
                 ) {
-                    PY = Zero.randomNumber(
-                        80, 
-                        Math.floor( ring.height - 80 )
+                    while ( 
+                        PY < player.y + player.height * 4 
+                        && PY > player.y + player.height * 4
+                    ) {
+                        PY = Zero.randomNumber(
+                            80, 
+                            Math.floor( ring.height - 80 )
+                        );
+                    }
+                }
+                
+                // Creates mob, only, if numChildren is less than 41
+                if ( ring.numChildren < 41 ) {
+                    // Creating mob
+                    var temp:MobsGrapes = new MobsGrapes(  spriteList[1] );
+                    temp.x = PX + Zero.randomNumber( -4, 4 );
+                    temp.y = PY + Zero.randomNumber( -4, 4 );
+                    temp.alpha = 0;
+                    
+                    // Avoids spawning outside arena.
+                    if ( temp.x < 96 ) {
+                        temp.x = 96;
+                    } else if ( temp.x > ring.width - 96 ) {
+                        temp.x = ring.width - 96;
+                    }
+                    if ( temp.y < 80 ) {
+                        temp.y = 80;
+                    } else if ( temp.y > ring.height - 80 ) {
+                        temp.x = ring.height - 80;
+                    }
+                    
+                    // Adds to stage
+                    ring.addChild ( temp );
+                    
+                    Actuate.tween(
+                        temp, 
+                        0.3, 
+                        {
+                            alpha: 1, 
+                            x: PX, 
+                            y: PY
+                        }
+                    ).onComplete(
+                        function() 
+                        {
+                            mobs.push( temp );
+                        }
                     );
-                }
+                } 
             }
-            
-            // Creating mob
-            var temp:MobsGrapes = new MobsGrapes();
-            temp.x = PX + Zero.randomNumber( -4, 4 );
-            temp.y = PY + Zero.randomNumber( -4, 4 );
-            temp.alpha = 0;
-            
-            // Avoids spawning outside arena.
-            if ( temp.x < 96 ) {
-                temp.x = 96;
-            } else if ( temp.x > ring.width - 96 ) {
-                temp.x = ring.width - 96;
-            }
-            if ( temp.y < 80 ) {
-                temp.y = 80;
-            } else if ( temp.y > ring.height - 80 ) {
-                temp.x = ring.height - 80;
-            }
-            
-            // Adds to stage
-            ring.addChild ( temp );
-            
-            Actuate.tween(
-                temp, 
-                0.3, 
-                {
-                    alpha: 1, 
-                    x: PX, 
-                    y: PY
-                }
-            ).onComplete(
-                function() 
-                {
-                    mobs.push( temp );
-                }
-            );
         }
     }
     
@@ -1143,6 +1165,54 @@ class Game extends Sprite
                     bClass = bClass.substr( bClass.lastIndexOf( "." ) + 1);
                 }
             }
+        }
+    }
+    
+    /**
+     * Swaps children's index value for a display object, be it stage or another 
+     * container, according to the y values of each object, useful for top-down 
+     * 2.5d sprites.
+     * 
+     * Accepts a function/method that receives the display objects being compared, 
+     * while changing depth, and does something to the display objects (tests 
+     * for collision, push/pull, obstacles, jumping, etc.).
+     * 
+     * @param c Must be a display object that accepts children
+     * @param callback Method/function that compares object types.
+     */
+    public function layersSwapping<T> (
+        c:Dynamic, 
+        callback:Dynamic->Dynamic->Void = null 
+    ):Void {
+        // Executes, only, if numChildren is bigger than 1
+        if ( c.numChildren > 1 ) {
+            // First iteration
+            for ( i in 0...c.numChildren ) {
+                // Second iteration
+                for ( j in 0...c.numChildren ) {
+                    // Temporary children handlers
+                    var a:Dynamic = c.getChildAt( i );
+                    var b:Dynamic = c.getChildAt( j );
+                    
+                    // Declaring values for comparison
+                    var pos:Bool = ( a.y > b.y );
+                    var idx:Bool = ( c.getChildIndex( a ) > c.getChildIndex( b ) );
+                    
+                    // Comparing y position
+                    if ( pos != idx ) {
+                        // Swapping indexes
+                        c.swapChildren( a, b );
+                    }
+                    
+                    // Applying callback
+                    if ( null != callback ) {
+                        callback( a, b );
+                    }
+                }
+            }
+        } else {
+            // Debug
+            trace( 'No children to test for collision.' );
         }
     }
 }

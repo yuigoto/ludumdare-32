@@ -2,6 +2,7 @@ package br.com.sixsided.ld32.object;
 
 // Importing packages
 import openfl.Assets;
+import openfl.display.BitmapData;
 import openfl.display.Shape;
 import openfl.display.Sprite;
 import openfl.display.Tilesheet;
@@ -131,6 +132,11 @@ class Player extends Sprite
      */
     private var tileTime:Int = 3;
     
+    /**
+     * Sprite Bitmapdata
+     */
+    private var bitmap:BitmapData;
+    
     
      
     /* CONSTRUCTOR + DESTRUCTOR
@@ -138,11 +144,15 @@ class Player extends Sprite
     
     /**
      * Main constructor.
+     * 
+     * @var bitmapData Bitmapdata for this sprite.
      */
-    public function new() 
+    public function new( bitmapData:BitmapData ) 
     {
         // Super constructor!
         super();
+        
+        bitmap = bitmapData;
         
         // Certifying that stage is set
         if ( null != stage ) {
@@ -186,7 +196,7 @@ class Player extends Sprite
         bounding();
         
         // Initializes tilesheet
-        tile = new Tilesheet( Assets.getBitmapData( "image/sprite-player.png" ) );
+        tile = new Tilesheet( bitmap );
         
         // Defines all the tiles ( 64 X 112 )
         for ( row in 0...6 ) {
