@@ -1,10 +1,11 @@
-# Berry | The Last Straw
+YX : Jam : LD32 - Berry, the Last Straw
+=======================================
 
-## My entry for the Ludum Dare #32 Jam
+_LD32 Theme: **Unconventional Weapon**_
+
+> Berry is a strawberry, the last one actually :P, in the middle of a zombie grape apocalypse. He knows he's goin' down, but not without a fight!
 
 ![Berry Title](art/berrytitle.png)
-
-Berry is a strawberry, the last one actually :P, in the middle of a zombie grape apocalypse. He knows he's goin' down, but not without a fight!
 
 To fight the horde of zombie grapes his only weapons are his own seeds, but he has to spin really fast to throw'em on to cause enough damage. The downside of this is that he doesn't have control on the direction of his projectiles!
 
@@ -16,17 +17,11 @@ Run, shoot, wait, recover, shoot again, run even more then DIE! :3
 
 Too bad for you, Berry...
 
------
+## Controls
 
-## License
+Click, hold and drags your mouse on the game screen to move Berry. Press spacebar to spin and throw seeds!
 
-The code in this repo, is distributed under the MIT License.
-
-The artwork and music, though, isn't. If you want to use part of the artwork in here to create derivative works or other uses, just contact me! It doesn't hurt and feels nice, ok? :)
-
-The fonts I used for this project were **Dekar**, by _Font Fabric_, and **Comic Neue**, by _Craig Rozynski_.
-
------
+On the Android version, you do both with the touch. So it's like "sudden death" mode for mobile users. :3
 
 ## Versions
 
@@ -38,27 +33,15 @@ There are three versions, as of now:
  - Android;
  - Flash;
 
------
+## Dependencies
 
-## Building
-
-To build the project, you need the latest OpenFl and Lime tools installed. Also, you need Actuate.
+To build the project, you need the latest OpenFl and Lime tools installed. Also, you need the Actuate library.
 
 This project was made using OpenFl 3.0.2, but I recommend you to build it using legacy mode (with the `-Dv2` and `-Dlegacy` flags), for performance (mainly on the Windows version).
 
------
+## Authors
 
-## Controls
-
-Click, hold and drags your mouse on the game screen to move Berry. Press spacebar to spin and throw seeds!
-
-On the Android version, you do both with the touch. So it's like "sudden death" mode for mobile users. :3
-
------
-
-Post mortem coming soon! (As soon as I get enough sleep! :P
-
------
+- **Fabio Y. Goto** ([lab@yuiti.com.br][mailto01])
 
 ## Special Thanks
 
@@ -68,3 +51,21 @@ My **whole family**, which understood me and let me do what I wanted for my own 
 
 
 To a **LOT** of people in the LD irc channel, people the OpenFl community (forgot to put it here >_<), commenters, people on twitter and everybody who answered my newbie questions. ;)
+
+## License
+
+The code in this repo is distributed under the `MIT License`, plase check the `LICENSE.md` file.
+
+The artwork and music, though, isn't. If you want to use part of the artwork in here to create derivative works or other uses, just contact me! It doesn't hurt and feels nice, ok? :)
+
+The fonts I used for this project were **Dekar**, by _Font Fabric_, and **Comic Neue**, by _Craig Rozynski_.
+
+-----
+
+_© 2015 Fabio Y. Goto_
+
+[\\]: ======================================================================
+
+[mailto01]: mailto:lab@yuiti.com.br
+
+[\\]: ======================================================================
